@@ -1,0 +1,2 @@
+export const PRODUCT_SORT = 'PRODUCT_SORT'
+export const DEFAULT_STATE = 'DEFAULT_STATE'

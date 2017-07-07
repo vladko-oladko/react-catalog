@@ -1,0 +1,42 @@
+body{
+    background-color: #e8ecf2;
+    margin: 0;
+    padding: 0;
+}
+.content{
+    margin-top: 60px;
+}
+.rubric{
+    text-align: center;
+    margin-bottom: 60px;
+    width: ;
+}
+.list_product{
+    display: inline-block;
+    position: relative;
+    max-width: 300px;
+    height: 400px;
+    text-align: center;
+    border: 1px solid gray;
+    border-radius: 7px;
+    background: white;
+    margin-left: 6%;
+    margin-bottom: 6%;
+}
+.description_item{
+    text-align: justify;
+}
+.item_detail{
+    background: white;
+}
+.vertical-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    background-color: white;
+    height: 100%;
+}
+.vertical-menu input{
+    margin-left: 25px;
+}
