@@ -43,18 +43,20 @@ export const initialState = {
             category: 'laptop'
         }
     ],
+    currentCategory: '',
 };
 export default function products(state = initialState, action) {
     switch (action.type) {
         case PRODUCT_SORT:
-            state = initialState
-            action.payload = state.productsById.filter(item => !item.category.localeCompare(action.payload))
             return {
                 ...state,
-                productsById: action.payload
+                currentCategory: action.payload
             }
         case DEFAULT_STATE:
-            return initialState;
+            return {
+                ...state,
+                currentCategory: ''
+            }
         default:
             return state;
     }
