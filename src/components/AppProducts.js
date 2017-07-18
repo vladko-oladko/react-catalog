@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import Grid from 'react-bootstrap/lib/Grid';
-import Col from 'react-bootstrap/lib/Col';
-import Row  from 'react-bootstrap/lib/Row';
 import { connect } from 'react-redux';
 import Product from './product';
-import AppSideBar from './AppSideBar'
+import AppSideBar from './AppSideBar';
+import { Button, Grid, Col, Row } from 'react-bootstrap';
+import * as Actions from './../actions';
+
 
 class AppProducts extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            сurrentProducts: []
+            сurrentProducts: this.props.products,
+            currentDisplay: 'tile'
         };
+        this.handleOnClick = this.handleOnClick.bind(this);
     }
 
     componentDidMount() {
@@ -19,39 +21,54 @@ class AppProducts extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.currentCategory !== this.props.currentCategory) {
-            this.sortProducts();
+        if (prevProps !== this.props){
+             this.sortProducts()
+        }
+        if (prevProps.search !== this.props.search){
+             this.searchProducts()
         }
     }
 
     sortProducts() {
-        if (this.props.currentCategory == '') {
-            this.setState({сurrentProducts: this.props.products});
-        } else {
-            this.setState({сurrentProducts: this.props.products.filter(item => !item.category.localeCompare(this.props.currentCategory))});
+        let products = this.props.products;
+        if (this.props.currentCategory !== '') {
+            products = products.filter(item => !item.category.localeCompare(this.props.currentCategory));
         }
+        if (this.props.priceTo !== '') {
+            products = products.filter(item => (item.price > this.props.priceFrom && item.price < this.props.priceTo));
+        } else {
+            products = products.filter(item => (item.price > this.props.priceFrom));
+        }
+        this.setState({сurrentProducts: products})
+    }
+
+    searchProducts() {
+        this.setState({сurrentProducts: this.props.products.filter(item => item.name.toLowerCase().includes(this.props.search))});
+    }
+
+    handleOnClick(name){
+        this.setState({currentDisplay: name});
     }
 
     render() {
         return (
-            <div>
-                <AppSideBar/>
-                <Grid className="content">
-                    <Row className="show-grid ">
-                        <h1 className="rubric">Товары</h1>
-                        {this.state.сurrentProducts.map(product => (
+            <Grid fluid className="content">
+                <Row >
+                    <AppSideBar/>
+                    <Button type='button' onClick={() => this.handleOnClick('tile')}>Плиткой</Button>
+                    <Button type='button' onClick={() => this.handleOnClick('line')}>Строкой</Button>
+                    <h1 className="rubric">Товары</h1>
+                    <Col lg={10}>
+                        {this.state.сurrentProducts.map(item => (
                             <Product
-                                key={product.id}
-                                id={product.id}
-                                name={product.name}
-                                description={product.description}
-                                image={product.image}
-                                price={product.price}
+                                key={item.id}
+                                product={item}
+                                display={this.state.currentDisplay}
                             />
                         ))}
-                    </Row>
-                </Grid>
-            </div>
+                    </Col>
+                </Row>
+            </Grid>
         );
     }
 
@@ -60,17 +77,16 @@ class AppProducts extends Component {
 function mapStateToProps (state) {
     return {
         products: state.products.productsById,
-        currentCategory: state.products.currentCategory
+        search: state.products.search,
+        currentCategory: state.categories.currentCategory,
+        priceFrom: state.categories.priceFrom,
+        priceTo: state.categories.priceTo,
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-      custom: (data) => dispatch({
-          type: 'ACTION',
-          payload: data,
-      })
-  }
+function mapDispatchToProps(dispatch) {
+    return {
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppProducts);
