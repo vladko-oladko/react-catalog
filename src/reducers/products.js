@@ -1,4 +1,4 @@
-import * as actions from './../constants'
+import * as actions from './../constants/products'
 
 export const initialState = {
     productsById: [
@@ -7,15 +7,25 @@ export const initialState = {
             name: 'iPhone 6s',
             image: 'src/data/images/iphone-6.png',
             description: 'Модель iPhone 2015 года. Внешние изменения незначительные, корпус получил новый цвет — Rose Gold. Внутренние изменения более масштабные. Обновленный процессор А9, технология экрана 3D Touch, которая реагирует на силу нажатия на экран смартфона. Основная камера полностью новая, ее разрешение теперь 12Мп и она может снимать видео в разрешении 4K, фронтальная на 5Мп.',
+            resolution: '750x1334',
+            cpu: 'Apple A9',
+            core: 1850,
+            cpuCount: 2,
+            weight: 143,
             price: 1000,
             category: 'phone',
-            count: 1
+            count: 1,
         },
         {
             id: 2,
             name: 'IPhone SE',
             image: 'src/data/images/iphone-5se.png',
             description: 'iPhone SE — это не просто невероятно популярный дизайн. Это следующий шаг в его развитии. Корпус лёгкого, компактного и удобного телефона сделан из гладкого матированного алюминия. На великолепном 4‑дюймовом дисплее Retina всё выглядит невероятно чётко и ярко. А завершают картину матовые скошенные края и логотип из нержавеющей стали.',
+            resolution: '640x1136',
+            cpu: 'Apple A9',
+            core: 1850,
+            cpuCount: 2,
+            weight: 113,
             price: 870,
             category: 'phone',
             count: 1
@@ -25,6 +35,11 @@ export const initialState = {
             name: 'Xiaomi Mi Book Air 13,3',
             image: 'src/data/images/mibook-air-13.3-inch.png',
             description: '13.3" 1920 x 1080 глянцевый, Intel Core i5 6200U 2300 МГц, 8 ГБ, 256 Гб (SSD), NVIDIA GeForce 940MX, Linux, цвет крышки серебристый, цвет корпуса серебристый',
+            resolution: '1920x1080',
+            cpu: 'Intel Core i5',
+            core: 2300,
+            cpuCount: 2,
+            weight: 1280,
             price: 1770,
             category: 'laptop',
             count: 1
@@ -34,6 +49,11 @@ export const initialState = {
             name: 'iPhone 7',
             image: 'src/data/images/iphone-7.png',
             description: 'Модель iPhone 2016 года. Внешние изменения незначительные, корпус получил новый цвет — Jet Black и поменялся привычный цвет Space Gray на Black. Впервые в своей истории корпус защищен от пыли и влаги по стандарту IP67, а вместо одного громкоговорителя теперь два стерео динамика.',
+            resolution: '750x1334',
+            cpu: 'Apple A10',
+            core: 2340,
+            cpuCount: 4,
+            weight: 128,
             price: 1400,
             category: 'phone',
             count: 1
@@ -43,14 +63,30 @@ export const initialState = {
             name: 'Apple MacBook Air 13"',
             image: 'src/data/images/MacBook_Air_13-Inch-SCREEN.png',
             description: '13.3" 1440 x 900 глянцевый, Intel Core i5 1600 МГц, 8 ГБ, 128 Гб (SSD), Intel HD Graphics 6000, OS X, цвет крышки серебристый, цвет корпуса серебристый',
+            resolution: '750x1334',
+            cpu: 'Intel Core i5',
+            core: 1600,
+            cpuCount: 2,
+            weight: 1350,
             price: 1950,
             category: 'laptop',
             count: 1
         }
     ],
+    fields: {
+        name: 'Название',
+        description: 'Описание',
+        resolution: 'Разрешение',
+        cpu: 'Модель процессора',
+        cpuCount: 'Количество ядер',
+        core: 'Частота процессора, МГц',
+        weight: 'Вес, г',
+        price: 'Цена, BYR'
+    },
     search:'',
     basket: [],
-    totalPrice: 0
+    totalPrice: 0,
+    descriptions: ['name', 'resolution', 'cpu','cpuCount', 'core', 'weight', 'price']
 
 };
 export default function products(state = initialState, action) {

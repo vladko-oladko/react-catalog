@@ -1,21 +1,30 @@
 import React, { Component } from 'react';
-import { Col, Image, Row, Grid } from 'react-bootstrap';
+import { Col, Image, Row, Grid, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class AppItemProduct extends Component {
     render() {
-        var Item = this.props.products.filter(item => item.id ==(this.props.match.params.id));
-        Item = Item[0];
+        var product = this.props.products.filter(item => item.id ==(this.props.match.params.id))[0];
         return (
             <Grid className='item_detail'>
                 <Row>
                     <Col xs={4} md={4} lg={4}>
-                        <Image src={`/${Item.image}`} responsive/>
+                        <Image src={`/${product.image}`} responsive/>
                     </Col>
                     <Col xs={6} md={6} lg={8} className='description_item'>
-                        <p>{Item.name}</p>
-                        <p>{Item.description}</p>
+                        <p>{product.name}</p>
+                        <p>{product.description}</p>
                     </Col>
+                    <Table bordered striped className='table-compare' >
+                        <tbody>
+                            {this.props.descriptions.map((descr, index) => (
+                                <tr key={index}>
+                                    <th >{this.props.fields[descr]}</th>
+                                    <td>{product[descr]}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table >
                 </Row>
             </Grid>
         )
@@ -24,7 +33,9 @@ class AppItemProduct extends Component {
 
 function mapStateToProps (state) {
     return {
-        products: state.products.productsById
+        products: state.products.productsById,
+        descriptions: state.products.descriptions,
+        fields: state.products.fields,
     }
 }
 

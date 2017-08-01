@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import AppBasket from './AppBasket';
 import {Link, Redirect} from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import * as Actions from './../actions';
+import * as Actions from './../actions/orders';
 
 function FieldGroup({ id, label, help, ...props }) {
   return (

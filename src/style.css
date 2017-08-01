@@ -1,23 +1,22 @@
-
 .rubric{
     text-align: center;
     margin-bottom: 4%;
 }
 .tile_product{
-    display: inline-block;
     position: relative;
-    height: 450px;
+    min-height: 400px;
+    min-width: 28%;
     text-align: center;
     border: 1px solid gray;
     border-radius: 7px;
     background: #efefef;
-    margin-left: 6%;
-    margin-bottom: 6%;
+    margin-left: 5%;
+    margin-bottom: 5%;
 }
 .line_product{
     display: inline-block;
     position: relative;
-    height: 250px;
+    height: 220px;
     text-align: center;
     border: 1px solid gray;
     border-radius: 7px;
@@ -28,15 +27,23 @@
 .description_item{
     text-align: justify;
 }
-.sideBar{
-    height: 100%;
+.btn-compare{
+    position: absolute;
+    right: 7%;
 }
-.input-price{
-    width: 35%;
+.options input[type='text']{
+    display: inline-block;
+    width: 47%;
+    margin-left: 3%;
+}
+.options p{
+    display: inline-block;
+    width: 70%;
+    margin-top: 10%;
+    margin-right: 5%;
 }
 .hidden-block {
     position: absolute;
-    margin-top: 7px;
     right: -160px;
     display: none;
     width: 500px;
@@ -44,7 +51,7 @@
     background-color: white;
     z-index: 1;
     border: 1px solid gray;
-    overflow-y: scroll
+    overflow: auto;
 }
 .block {
     position: relative;
@@ -53,6 +60,36 @@
     display: block;
 }
 .basket-item{
-    margin-top: 3%;
+    margin-top: 4%;
+    font-size: 16px;
 }
-
+.basket-item button{
+    width: 6%;
+}
+.tile-prop{
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+.table-compare{
+    overflow-x: scroll
+}
+.table-compare td{
+    min-width: 300px;
+}
+.table-compare img{
+    width: 70%;
+    max-width: 400px
+}
+.btn-active{
+    background: #efefef;
+}
+.checkbox-options{
+    margin-left: 20%;
+}
+.add-compare{
+    font-size: 14px;
+}
+.tile-descr{
+    position: absolute;
+    bottom: 0;
+}

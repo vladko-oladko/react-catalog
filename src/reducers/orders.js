@@ -1,4 +1,4 @@
-import * as actions from './../constants'
+import * as actions from './../constants/orders'
 
 export const initialState = {
     orders: []

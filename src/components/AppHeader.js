@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {Nav, Navbar, NavItem, FormGroup, FormControl, Button, Col, Grid, Row} from 'react-bootstrap';
+import {Nav, Navbar, NavItem, FormGroup, FormControl, Button, Col, Grid, Row, Clearfix} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as Actions from './../actions';
+import * as Actions from './../actions/products';
 import AppBasket from './AppBasket';
 
 class AppHeader extends Component {
@@ -11,13 +11,14 @@ class AppHeader extends Component {
         super(props);
         this.searchHandler = this.searchHandler.bind(this);
     }
+
     searchHandler(e) {
         this.props.actions.inputSearch(e.target.value.toLowerCase())
     }
 
     render() {
         return (
-                <Navbar >
+                <Navbar>
                     <Navbar.Header>
                         <Navbar.Brand>
                             <Link to='/'>Главная</Link>
@@ -30,25 +31,23 @@ class AppHeader extends Component {
                                 <FormControl type='text' placeholder='Поиск' onChange={this.searchHandler}/>
                             </FormGroup>
                         </Navbar.Form>
-                        <Navbar.Text pullRight >
-                            <Button className="block">
+                        <Nav pullRight >
+                            <NavItem className="block">
                                 Корзина
-                                <Grid fluid className='hidden-block'>
-                                    <Row>
-                                        {this.props.basket.map((item, index) => (
-                                            <AppBasket
-                                                key={index}
-                                                itemBasket={item}
-                                            />
-                                        ))}
-                                        <Col className='basket-item' lg={8}>
-                                                <p>Итого: {this.props.totalPrice} BYR</p>
-                                                <Link to='/order'>Оформить заказ</Link>
-                                        </Col>
-                                    </Row>
-                                </Grid>
-                            </Button>
-                        </Navbar.Text>
+                                <Col className='hidden-block'>
+                                    {this.props.basket.map((item, index) => (
+                                        <AppBasket
+                                            key={index}
+                                            itemBasket={item}
+                                        />
+                                    ))}
+                                    <Col className='basket-item' lg={8}>
+                                        <p>Итого: {this.props.totalPrice} BYR</p>
+                                        <Link to='/order'>Оформить заказ</Link>
+                                    </Col>
+                                </Col>
+                            </NavItem>
+                        </Nav>
                     </Navbar.Collapse>
                 </Navbar>
         );
