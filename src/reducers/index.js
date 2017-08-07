@@ -3,12 +3,15 @@ import products from './products';
 import categories from './categories';
 import orders from './orders';
 import compare from './compare';
+import auth from './auth';
+
 
 const appReducer = combineReducers({
     products,
     categories,
     orders,
-    compare
+    compare,
+    auth
 });
 
 export default appReducer;

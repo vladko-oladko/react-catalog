@@ -17,7 +17,7 @@ class Product extends Component {
     }
 
     componentDidMount() {
-        if (this.props.compareProducts.includes(this.props.product.id)) {
+        if (this.props.compareProducts.includes(this.props.product._id)) {
             this.setState({checkCompare: true})
         }
     }
@@ -40,18 +40,18 @@ class Product extends Component {
         var description = this.props.product.description.substr(0,150) + '...'
         if (this.props.display == 'tile') {
             return (
-                <Col xs={10} sm={4} md={4} lg={3} className="tile_product">
-                    <Link to={{pathname:`/item/${this.props.product.id}`}}><h3>{this.props.product.name}</h3></Link>
-                    <Link to={{pathname:`/item/${this.props.product.id}`}}><Image src={this.props.product.image} responsive /></Link>
+                <Col xs={5} sm={4} md={4} lg={3} className="tile_product">
+                    <Link to={{pathname:`/item/${this.props.product._id}`}}><h3>{this.props.product.name}</h3></Link>
+                    <Link to={{pathname:`/item/${this.props.product._id}`}}><Image src={this.props.product.image} responsive /></Link>
                     <div className='tile-descr'>
-                        <Col xs={7} md={4} lg={7} >
+                        <Col xs={5} md={4} lg={7} >
                             <h4>{this.props.product.price} BYR</h4>
                         </Col>
                         <Col xs={3} md={4} lg={5}>
                             <Button type='button' onClick={() => this.handlerAddToBasket(this.props.product.name)}>Купить</Button>
                         </Col>
                         <Col xs={12} md={12} lg={12} >
-                            <Checkbox className='add-compare' checked={this.state.checkCompare} onChange={(event) => this.handlerToCompare(this.props.product.id, event.target.checked)}> Добавить к сравнению</Checkbox>
+                            <Checkbox className='add-compare' checked={this.state.checkCompare} onChange={(event) => this.handlerToCompare(this.props.product._id, event.target.checked)}> Добавить к сравнению</Checkbox>
                         </Col>
                     </div>
                 </ Col>
@@ -60,16 +60,16 @@ class Product extends Component {
             return (
                 <Col xs={10} md={4} lg={12} className="line_product" >
                     <Col xs={10} md={4} lg={3} >
-                        <Link to={{pathname:`/item/${this.props.product.id}`}}><Image src={this.props.product.image} responsive /></Link>
+                        <Link to={{pathname:`/item/${this.props.product._id}`}}><Image src={this.props.product.image} responsive /></Link>
                     </Col>
                     <Col xs={10} md={4} lg={5} >
-                       <Link to={{pathname:`/item/${this.props.product.id}`}}><h3>{this.props.product.name}</h3></Link>
+                       <Link to={{pathname:`/item/${this.props.product._id}`}}><h3>{this.props.product.name}</h3></Link>
                        <p>{description}</p>
                     </Col>
                     <Col xs={10} md={4} lg={3} lgOffset={1}>
                         <h3>{this.props.product.price} BYR</h3>
                         <Button type='button' onClick={() => this.handlerAddToBasket(this.props.product.name)}>Купить</Button>
-                        <Checkbox checked={this.state.checkCompare} onChange={(event) => this.handlerToCompare(this.props.product.id, event.target.checked)}> Добавить к сравнению</Checkbox>
+                        <Checkbox checked={this.state.checkCompare} onChange={(event) => this.handlerToCompare(this.props.product._id, event.target.checked)}> Добавить к сравнению</Checkbox>
                     </Col>
                 </ Col>
             )

@@ -48,10 +48,20 @@ class AppOrder extends Component {
             alert('Email введен не корректно')
         }
         else {
-            this.props.actions.addOrder(this.state)
+            let order = {
+                firstname: this.state.firstname,
+                surname: this.state.surname,
+                address: this.state.address,
+                number: this.state.number,
+                email:this.state.email,
+                basket: this.props.basket.map(item => {
+                    return ([item.name, item.count])
+                }),
+            }
+            console.log(order)
+            this.props.actions.addOrder(order)
             alert('Спасибо за заказ! Деньги мы у вас возьмем, но товар конечно не привезем. А пока идите еще чонить закажите ')
             this.setState({redirectToReferrer: true})
-            console.log(this.props.orders)
         }
     }
 

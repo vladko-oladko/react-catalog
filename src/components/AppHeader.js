@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Nav, Navbar, NavItem, FormGroup, FormControl, Button, Col, Grid, Row, Clearfix} from 'react-bootstrap';
+import {Nav, Navbar, NavItem, FormGroup, FormControl, Col} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -14,6 +15,13 @@ class AppHeader extends Component {
 
     searchHandler(e) {
         this.props.actions.inputSearch(e.target.value.toLowerCase())
+        if (e.target.value == '') {
+            this.props.actions.getListProducts()
+        }
+    }
+
+    componentDidMount(){
+        this.props.actions.getListProducts()
     }
 
     render() {
@@ -47,6 +55,12 @@ class AppHeader extends Component {
                                     </Col>
                                 </Col>
                             </NavItem>
+                            <LinkContainer to="/signup">
+                                <NavItem eventKey={1}>Регистрация</NavItem>
+                            </LinkContainer>
+                            <LinkContainer to="/login">
+                                <NavItem eventKey={2}>Войти</NavItem>
+                            </LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

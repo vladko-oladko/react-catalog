@@ -14,7 +14,7 @@ class AppCompare extends Component {
     }
 
     render() {
-        var productsToCompare = this.props.products.filter(product => this.props.compareProducts.indexOf(product.id) != -1)
+        var productsToCompare = this.props.products.filter(product => this.props.compareProducts.indexOf(product._id) != -1)
         return (
             <Table  bordered   className='table-compare' >
                 <tbody >
@@ -23,7 +23,7 @@ class AppCompare extends Component {
                         {productsToCompare.map((item, index) => (
                             <td key={index}>
                                 <Image src={item.image}/>
-                                <Button type='button' onClick={() => this.handlerDeleteFromCompare(item.id)}>-</Button>
+                                <Button type='button' onClick={() => this.handlerDeleteFromCompare(item._id)}>-</Button>
                             </td>
                         ))}
                     </tr>

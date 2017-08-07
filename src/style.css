@@ -4,7 +4,7 @@
 }
 .tile_product{
     position: relative;
-    min-height: 400px;
+    min-height: 370px;
     min-width: 28%;
     text-align: center;
     border: 1px solid gray;

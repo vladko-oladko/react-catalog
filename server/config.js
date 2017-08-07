@@ -1,3 +1,4 @@
-const configDb = 'mongodb://localhost:27017/Product';
-
-module.exports.configDb = configDb;
+export const dbConfig = {
+    secret: 'megasupersecretkey',
+    db: 'mongodb://localhost/catalogdb',
+};

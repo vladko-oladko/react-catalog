@@ -20,6 +20,7 @@ class AppProducts extends Component {
 
     componentDidMount() {
         this.sortProducts();
+
     }
 
     componentDidUpdate(prevProps, prevState) {

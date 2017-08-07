@@ -1,9 +1,8 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
-    id: {type: Number},
     name: {type: String},
     image: {type: String},
     description: {type: String},
@@ -17,4 +16,4 @@ const ProductSchema = new Schema({
     count: {type: Number},
 })
 
-module.exports =  mongoose.model('product', ProductSchema);
+export default mongoose.model('products', ProductSchema);

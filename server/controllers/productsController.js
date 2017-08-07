@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
-const Product = require('../models/product');
+import mongoose from 'mongoose';
+import product from '../models/product';
 
-function listProducts(req, res) {
-    Product.find({}, function(err, data) {
-        res.json({ message: 'vladhui' });
-    });
+export function listProducts() {
+    return product.find();
 }
-
-module.exports.listProducts = listProducts;
+export function itemProduct(data) {
+    return product.findOne({_id: data});
+}
