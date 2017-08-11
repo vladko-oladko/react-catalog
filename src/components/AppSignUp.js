@@ -17,6 +17,7 @@ class AppSignUp extends React.Component {
             passValid: valid.default,
             confirmPassValid: valid.default,
             error: {},
+            redirect: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -36,6 +37,7 @@ class AppSignUp extends React.Component {
                 email: this.state.email,
                 password: this.state.pass,
             });
+            this.setState({redirect: true})
         }
     }
 
@@ -78,6 +80,9 @@ class AppSignUp extends React.Component {
     }
 
     render() {
+        // if (this.state.redirect){
+        //     return( <Redirect to='/login'/> )
+        // }
         return (
             <Grid>
                 <Row>

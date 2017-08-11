@@ -7,6 +7,13 @@ const initialState = {
 
 export default function auth(state = initialState, action) {
     switch (action.type) {
+    case types.AUTH_USER:
+        return {
+            ...state,
+            isAuth: true,
+            role: action.payload,
+            error: {},
+        };
     case types.SIGN_UP_SUCCESS:
         return {
             ...state,
@@ -18,6 +25,25 @@ export default function auth(state = initialState, action) {
             ...state,
             signup: false,
             error: { signup: action.payload }
+        };
+    case types.LOG_IN_SUCCESS:
+        return {
+            ...state,
+            isAuth: true,
+            role: action.payload,
+            error: {},
+        };
+    case types.LOG_IN_FAILURE:
+        return {
+            ...state,
+            isAuth: false,
+            error: { login: action.payload },
+        };
+    case types.LOG_OUT:
+        return {
+            ...state,
+            isAuth: false,
+            error: {}
         };
     default:
         return state;

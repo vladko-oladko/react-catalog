@@ -5,7 +5,9 @@ import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from './../actions/products';
+import { logOut, authUser } from './../actions/auth';
 import AppBasket from './AppBasket';
+import { getFromStorage } from './../helpers/storage'
 
 class AppHeader extends Component {
     constructor(props) {
@@ -22,9 +24,32 @@ class AppHeader extends Component {
 
     componentDidMount(){
         this.props.actions.getListProducts()
+        const user = JSON.parse(getFromStorage('user'));
+        if (user && user.token) {
+            this.props.authUser(user.role)
+        }
     }
 
+
     render() {
+        const links = (
+            (this.props.isAuth) ? (
+                <Nav pullRight>
+                    <LinkContainer to="/login">
+                        <NavItem eventKey={1} onClick={this.props.logOut}>Выйти</NavItem>
+                    </LinkContainer>
+                </Nav >
+            ) : (
+                <Nav pullRight>
+                    <LinkContainer to="/signup">
+                        <NavItem eventKey={1}>Регистрация</NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/login">
+                        <NavItem eventKey={2}>Войти</NavItem>
+                    </LinkContainer>
+                </Nav>
+            )
+        );
         return (
                 <Navbar>
                     <Navbar.Header>
@@ -55,13 +80,8 @@ class AppHeader extends Component {
                                     </Col>
                                 </Col>
                             </NavItem>
-                            <LinkContainer to="/signup">
-                                <NavItem eventKey={1}>Регистрация</NavItem>
-                            </LinkContainer>
-                            <LinkContainer to="/login">
-                                <NavItem eventKey={2}>Войти</NavItem>
-                            </LinkContainer>
                         </Nav>
+                        {links}
                     </Navbar.Collapse>
                 </Navbar>
         );
@@ -72,13 +92,16 @@ function mapStateToProps (state) {
     return {
         search: state.products.search,
         basket: state.products.basket,
-        totalPrice: state.products.totalPrice
+        totalPrice: state.products.totalPrice,
+        isAuth: state.auth.isAuth
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(Actions, dispatch)
+        actions: bindActionCreators(Actions, dispatch),
+        logOut: bindActionCreators(logOut, dispatch),
+        authUser: bindActionCreators(authUser, dispatch)
     }
 }
 

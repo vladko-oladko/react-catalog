@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Product from './product';
 import AppSideBar from './AppSideBar';
+import AppChat from './AppChat';
 import {Link, Redirect} from 'react-router-dom';
 import { Button, Grid, Col, Row } from 'react-bootstrap';
 
@@ -88,6 +89,7 @@ class AppProducts extends Component {
                         <AppSideBar/>
                         <Button type='button' onClick={() => this.handleDisplay('tile')}>Плиткой</Button>
                         <Button type='button' onClick={() => this.handleDisplay('line')}>Строкой</Button>
+                        <AppChat/>
                         <Button className="btn-compare" type='button' onClick={() => this.handleCompare()}>Сравнить</Button>
                         <h1 className="rubric">Товары</h1>
                         <Col lg={10}>

@@ -1,4 +1,5 @@
 import User from '../models/user';
+import { getToken } from '../helpers/token'
 
 export const signup = (req, res, next) => {
     const { email, password } = req.body;

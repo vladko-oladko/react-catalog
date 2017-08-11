@@ -4,6 +4,7 @@ import categories from './categories';
 import orders from './orders';
 import compare from './compare';
 import auth from './auth';
+import chat from './chat';
 
 
 const appReducer = combineReducers({
@@ -11,7 +12,8 @@ const appReducer = combineReducers({
     categories,
     orders,
     compare,
-    auth
+    auth,
+    chat
 });
 
 export default appReducer;

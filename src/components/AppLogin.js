@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Grid, Row, Col, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import valid from '../constants/valid';
+import * as Actions from './../actions/auth';
 
-export default class LoginForm extends React.Component {
+class AppLogin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,7 +14,8 @@ export default class LoginForm extends React.Component {
             pass: '',
             emailValid: valid.default,
             passValid: valid.default,
-            error: null,
+            error: {},
+            redirect: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -27,7 +31,7 @@ export default class LoginForm extends React.Component {
 
     handleSubmit(e) {
         if (this.validate()) {
-            this.props.logIn({
+            this.props.actions.logIn({
                 email: this.state.email,
                 password: this.state.pass,
             });
@@ -36,7 +40,7 @@ export default class LoginForm extends React.Component {
 
     validate() {
         let err = {
-            error: null
+            error: {}
         };
 
         let check = true;
@@ -54,6 +58,9 @@ export default class LoginForm extends React.Component {
     }
 
     render() {
+        if (this.props.isAuth){
+            return( <Redirect to='/'/> )
+        }
         return (
             <Grid>
                 <Row>
@@ -61,7 +68,7 @@ export default class LoginForm extends React.Component {
                         <Form onChange={this.handleChange}>
                             <FormGroup controlId="loginHeader">
                                 <Col sm={12} className="text-center">
-                                    <h2>Log In</h2>
+                                    <h2>Войти</h2>
                                 </Col>
                             </FormGroup>
                             <FormGroup controlId="email" validationState={this.state.emailValid}>
@@ -72,12 +79,12 @@ export default class LoginForm extends React.Component {
                             </FormGroup>
                             <FormGroup controlId="loginError">
                                 <Col sm={12} className="text-center">
-                                    <p>{ this.state.error || this.props.serverError } </p>
+                                    <p>{(Object.values(this.state.error)) && this.props.serverError } </p>
                                 </Col>
                             </FormGroup>
                             <FormGroup controlId="submit">
                                 <Col xs={12}>
-                                    <Button onClick={this.handleSubmit} className="center-block">Log In</Button>
+                                    <Button onClick={this.handleSubmit} className="center-block">Ок</Button>
                                 </Col>
                             </FormGroup>
 
@@ -88,3 +95,18 @@ export default class LoginForm extends React.Component {
         );
     }
 }
+
+function mapStateToProps (state) {
+    return {
+        serverError: state.auth.error.login,
+        isAuth: state.auth.isAuth,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(Actions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppLogin);
